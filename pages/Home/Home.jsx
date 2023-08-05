@@ -4,6 +4,8 @@ import { requestForegroundPermissionsAsync, getCurrentPositionAsync} from "expo-
 
 import { s } from './Home.style';
 import { MeteoAPI } from './../../api/meteo';
+import { Txt } from '../../components/Txt/Txt';
+import { MeteoBasic } from '../../components/MeteoBasic/MeteoBasic';
 
 export function Home({}) {
 
@@ -45,7 +47,9 @@ export function Home({}) {
 
     return (
         <>            
-            <View style={s.basic}></View>
+            <View style={s.basic}>                
+                <MeteoBasic />
+            </View>
             <View style={s.search}></View>
             <View style={s.advance}></View>
         </>

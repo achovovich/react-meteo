@@ -7,11 +7,11 @@ export const s = StyleSheet.create({
   weatherLabel: {
     alignSelf: "flex-end",
     transform: [{ rotate: "-90deg" }],
+    fontSize: 20,
   },
   image: {
     height: 90,
     width: 90,
-    backgroundColor: "white",
   },
   tempBox: {
     flexDirection: "row",

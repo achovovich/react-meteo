@@ -6,6 +6,7 @@ import { s } from './Home.style';
 import { MeteoAPI } from './../../api/meteo';
 import { Txt } from '../../components/Txt/Txt';
 import { MeteoBasic } from '../../components/MeteoBasic/MeteoBasic';
+import { getWeatherInterpretation } from '../../services/meteo-service';
 
 export function Home({}) {
 
@@ -23,6 +24,8 @@ export function Home({}) {
 
     const [coords, setCoords] = useState(null);
     const [weather, setWeather] = useState(null);
+    const currentWeather = weather ?.current_weather;
+
 
     async function getCoords() {
         
@@ -44,14 +47,18 @@ export function Home({}) {
         const weather = await MeteoAPI.fetchWeatherFromCoords(coords);                
         setWeather(weather);
     }
-
-    return (
+    
+    return currentWeather ? (
         <>            
             <View style={s.basic}>                
-                <MeteoBasic />
+                <MeteoBasic 
+                    temperature={Math.round(currentWeather.temperature)}
+                    city=''
+                    interpretation={getWeatherInterpretation(currentWeather.weathercode)}
+                    />
             </View>
             <View style={s.search}></View>
             <View style={s.advance}></View>
         </>
-    );
+    ) : null ;
 }

@@ -12,6 +12,11 @@ import { getWeatherInterpretation } from '../../services/meteo-service';
 
 export function Home({}) {
 
+    const [coords, setCoords] = useState(null);
+    const [weather, setWeather] = useState(null);
+    const [city, setCity] = useState(null);
+    const currentWeather = weather ?.current_weather;
+
     useEffect(() => {
         getCoords();
 
@@ -20,15 +25,9 @@ export function Home({}) {
     useEffect(() => {
         if (coords) {
             fetchWeather(coords);
-            fetchCity(coords);
-
+            fetchCity(coords);            
         }
     }, [coords]);
-
-    const [coords, setCoords] = useState(null);
-    const [weather, setWeather] = useState(null);
-    const [city, setCity] = useState(null);
-    const currentWeather = weather ?.current_weather;
 
 
     async function getCoords() {
@@ -39,10 +38,10 @@ export function Home({}) {
             setCoords({
                 lat: location.coords.latitude,
                 lng: location.coords.longitude
-            });
-            
+            });                        
 
         } else {
+            console.log('default');
             setCoords({lat: "48.85", lng: "2.35"});//Paris par défaut
         }
     }
@@ -76,5 +75,5 @@ export function Home({}) {
             </View>
             
         </>
-    ) : null ;
+    ) : <Txt>Loading</Txt> ;
 }

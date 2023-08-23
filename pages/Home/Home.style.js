@@ -6,7 +6,6 @@ export const s = StyleSheet.create({
   },
   search: {
     flex: 2,
-    backgroundColor: "red",
   },
   advance: {
     flex: 1,

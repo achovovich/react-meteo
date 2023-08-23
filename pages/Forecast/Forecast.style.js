@@ -15,4 +15,7 @@ export const s = StyleSheet.create({
     button: {
         width: 30,
     },
+    list: {
+        marginTop: 50,
+    },
 });

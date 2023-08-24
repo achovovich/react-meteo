@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import { requestForegroundPermissionsAsync, getCurrentPositionAsync} from "expo-location";
 import { getWeatherInterpretation } from '../../services/meteo-service';
@@ -11,6 +11,7 @@ import { Txt } from '../../components/Txt/Txt';
 import { MeteoBasic } from '../../components/MeteoBasic/MeteoBasic';
 import { MeteoAdvanced } from '../../components/MeteoAdvanced/MeteoAdvanced';
 import { Container } from '../../components/Container/Container';
+import { Searchbar } from '../../components/Searchbar/Searchbar';
 
 export function Home() {
 
@@ -59,6 +60,15 @@ export function Home() {
         setCity(city);
     }
 
+    async function fetchCoordsByCity(city) {  
+        try {      
+            const coords = await MeteoAPI.fetchCoordsFromCity(city);
+            setCoords(coords);
+        } catch (e) {
+            Alert.alert("Ville non trouvée", e);
+        }
+    }
+
     function goToForecast() {        
         nav.navigate('Forecast', {city, ...weather.daily});
     }
@@ -73,7 +83,9 @@ export function Home() {
                 interpretation={getWeatherInterpretation(currentWeather.weathercode)}
                 />
             </View>
-            <View style={s.search}></View>
+            <View style={s.search}>
+                <Searchbar onSubmit={fetchCoordsByCity}/>
+            </View>
             <View style={s.advance}>
             <MeteoAdvanced 
                     dusk={weather.daily.sunrise[0].split("T")[1]}

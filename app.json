@@ -26,6 +26,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e0d310dd-f37d-49de-b574-5ff8f1477ae7"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/e0d310dd-f37d-49de-b574-5ff8f1477ae7"
     }
   }
 }

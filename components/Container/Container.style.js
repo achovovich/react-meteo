@@ -4,7 +4,6 @@ export const s = StyleSheet.create({
     background: {
         flex: 1,
         padding: 20,
-        paddingTop: 40,
     },
     container: {
         flex: 1,
